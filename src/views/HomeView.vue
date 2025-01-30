@@ -1,4 +1,5 @@
 <script setup>
+
 import { computed, ref } from 'vue';
 import SongCard from '@/components/SongCard.vue';
 import api from '@/services/api';
@@ -35,11 +36,9 @@ const fetchSongs = async () => {
 
 <template>
   <v-layout class="w-100 rounded rounded-md">
-    <v-app-bar color="grey" title="Songs" height="48" flat></v-app-bar>
-
     <!-- <v-navigation-drawer color="grey-lighten-1" location="left" width="150" permanent></v-navigation-drawer> -->
 
-    <v-main class="d-flex flex-column">
+    <v-main class="d-flex flex-column mx-4">
       <h1>Bem-vindo à database de discos!</h1>
       <h2>Comece pesquisando por um item:</h2>
 
@@ -64,48 +63,38 @@ const fetchSongs = async () => {
 
       <v-container v-if="songs.length > 0" class="mt-5">
         <v-row>
-          <v-col v-for="song in filteredSongs" :key="song.id" cols="12" md="6" lg="4">
-
+          <v-col v-for="song in filteredSongs" :key="song.id" cols="12" md="12" lg="4">
             <SongCard :song="song" />
           </v-col>
         </v-row>
       </v-container>
+
       <v-text v-else class="mt-4">Nenhum resultado encontrado.</v-text>
     </v-main>
   </v-layout>
 </template>
 
 <style scoped>
-.v-layout {
-  display: flex;
-  flex-direction: column;
-  background: rgb(31, 31, 31);
-}
-
-.v-main {
-  width: 100vw;
-  height: 100vh;
-}
-
-.v-app-bar {
-  background-color: #9b0000;
-  color: white;
-}
-
 .text-field-container {
   height: 5rem;
-  width: 80%;
+  width: 95%;
   margin-top: 1rem;
 
   .v-btn {
+    background-color: #48005d;
+    color: #FFF;
     height: 2rem;
     margin-left: 1rem;
     margin-bottom: 1rem;
   }
+
+  .v-btn:disabled {
+    background-color: #2f2631;
+    color: #666;
+  }
 }
 
 .selected-chip {
-  background-color: rgb(86, 161, 0);
-  color: black;
+  background-color: #370047;
 }
 </style>

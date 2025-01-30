@@ -1,8 +1,12 @@
 <template>
-    <v-card variant="tonal">
-        <v-card-title>{{ song.title }}</v-card-title>
-        <v-card-subtitle>{{ song.type }}</v-card-subtitle>
-        <img :src="song.cover_image" alt="Imagem da música" width="160" />
+    <v-card background="#270032" variant="tonal">
+        <div class="d-flex flex-no-wrap justify-space-between">
+            <div>
+                <v-card-title class="text-h6" style="max-width: 12rem; white-space: normal;">{{ song.title }}</v-card-title>
+                <v-card-subtitle>{{ song.type }}</v-card-subtitle>
+            </div>
+            <img :src="song.cover_image" alt="Imagem da música" width="160" />
+        </div>
     </v-card>
 </template>
 
@@ -23,10 +27,8 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    width: 16rem;
-    height: 18rem;
-    background-color: #1976D2;
-    color: white;
+    width: 24rem;
+    height: 14rem;
 
     img {
         margin-top: 1rem
