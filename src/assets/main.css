@@ -17,6 +17,7 @@
     width: 100vw;
     height: 100vh;
     color: #d8d8d8;
+    overflow: scroll;
 
     @media (min-width: 1024px) {
       padding: 5rem 15rem;
