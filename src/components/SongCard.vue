@@ -1,7 +1,8 @@
 <template>
     <v-card variant="tonal">
-        <h3>{{ title }}</h3>
-        <img :src="cover_art" alt="Imagem da música" width="160"/>
+        <v-card-title>{{ song.title }}</v-card-title>
+        <v-card-subtitle>{{ song.type }}</v-card-subtitle>
+        <img :src="song.cover_image" alt="Imagem da música" width="160" />
     </v-card>
 </template>
 
@@ -9,11 +10,8 @@
 export default {
     name: 'SongCard',
     props: {
-        title: {
+        song: {
             required: true
-        },
-        cover_art: {
-            required: false
         }
     }
 }
@@ -24,9 +22,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 12rem;
+    padding: 1rem;
+    width: 16rem;
     height: 18rem;
     background-color: #1976D2;
     color: white;
+
+    img {
+        margin-top: 1rem
+    }
 }
 </style>
