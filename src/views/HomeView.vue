@@ -38,7 +38,7 @@ const fetchSongs = async () => {
   <v-layout class="rounded rounded-md">
     <!-- <v-navigation-drawer color="grey-lighten-1" location="left" width="150" permanent></v-navigation-drawer> -->
 
-    <v-main class="d-flex flex-column mx-4">
+    <v-main class="d-flex flex-column">
 
       <div class="d-flex flex-row justify-center align-center text-field-container">
         <v-text-field label="Digite um termo para a busca (Artista, Álbum, Lançamento, etc...)" v-model="search"
@@ -74,16 +74,20 @@ const fetchSongs = async () => {
 
 <style scoped>
 .v-container {
-  position: absolute;
-  bottom: 0;
   overflow: scroll;
-  height: 70%;
+  height: 90vh;
+  width: 100rem;
   margin-bottom: 3rem;
+
+  .v-main {
+    display: flex !important;
+    align-items: center !important;
+  }
 }
 
 .text-field-container {
   height: 5rem;
-  width: 95%;
+  width: 100%;
   margin-top: 1rem;
 
   .v-btn {

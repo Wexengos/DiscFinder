@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { onMounted, computed, ref } from "vue";
+import { marked } from "marked"; // Import marked
 import api from "../services/api.js";
 import { ItemPageTypes } from "@/constants/ItemPageTypes.js";
 
@@ -23,18 +24,25 @@ onMounted(async () => {
         console.error("Failed to fetch item:", error);
     }
 });
+
+// Compute the Markdown-parsed profile text
+const parsedProfile = computed(() => {
+    return item.value?.profile ? marked(item.value.profile) : "";
+});
 </script>
 
 <template>
     <v-layout>
         <v-main>
-            <div v-if="item">
+            <div class="item-container" v-if="item">
                 <h1>{{ item.name || item.title }}</h1>
                 <h2>{{ typeLabel }}</h2>
 
                 <div>
-                    <v-row class="d-flex w-100 justify-around">
+                    <v-row class="item-profile d-flex w-100">
                         <img width="300px" v-if="item.images?.length > 0" :src="item.images[0].uri">
+
+                        <div v-if="item.profile" class="item-profile-text" v-html="parsedProfile"></div>
 
                         <div class="ml-5" v-if="item.contact_info">
                             <h2>Informações de contato:</h2>
@@ -56,34 +64,44 @@ onMounted(async () => {
                                 </v-row>
                             </div>
                         </div>
+
                     </v-row>
 
+                    <div v-if="item.urls?.length > 0">
+                        <h2>Links:</h2>
+                        <v-col>
+                            <div v-for="(url, index) in item.urls" :key="index">
+                                <a :href="url" target="_blank">{{ url }}</a>
+                            </div>
+                        </v-col>
+                    </div>
+
                     <div v-if="type === 'artists' && item.aliases?.length > 0">
-                        <h2>Também conhecido(a) como:</h2>
+                        <h2>Apelidos:</h2>
 
                         <v-row>
                             <div class="alias-container" v-for="(alias, index) in item.aliases" :key="index">
                                 <div>
-                                    <img height="200px" :src="alias.thumbnail_url">
-                                    <pre>{{ alias.name }}</pre>
+                                    <a :href="alias.resource_url">{{ alias.name }}</a>
                                 </div>
                             </div>
                         </v-row>
                     </div>
-
-                    <p>{{ item.profile }}</p>
-
-                    <!-- <pre>{{ item }}</pre> -->
                 </div>
             </div>
-            <div v-else>
-                Loading...
+            <div class="loading-container d-flex w-100 h-50 align-center justify-center" v-else>
+                <v-progress-circular color="#48005d" indeterminate :size="43" :width="5"></v-progress-circular>
             </div>
         </v-main>
     </v-layout>
 </template>
 
 <style scoped>
+.v-main {
+    overflow: scroll;
+    margin-bottom: 1rem;
+}
+
 .v-row {
     margin: 0;
     align-items: center;
@@ -97,6 +115,27 @@ onMounted(async () => {
         img {
             margin-bottom: 1rem;
         }
+    }
+}
+
+.item-container {
+    padding: 2rem;
+    background-color: rgb(31, 31, 31);
+}
+
+.item-profile {
+    display: flex;
+    background: rgb(43, 43, 43);
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+
+    .item-profile-text {
+        width: 70%;
+        max-height: 20rem;
+        overflow: scroll;
     }
 }
 </style>
