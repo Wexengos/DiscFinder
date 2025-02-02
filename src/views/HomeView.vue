@@ -39,8 +39,6 @@ const fetchSongs = async () => {
     <!-- <v-navigation-drawer color="grey-lighten-1" location="left" width="150" permanent></v-navigation-drawer> -->
 
     <v-main class="d-flex flex-column mx-4">
-      <h1>Bem-vindo à database de discos!</h1>
-      <h2>Comece pesquisando por um item:</h2>
 
       <div class="d-flex flex-row justify-center align-center text-field-container">
         <v-text-field label="Digite um termo para a busca (Artista, Álbum, Lançamento, etc...)" v-model="search"
@@ -51,7 +49,7 @@ const fetchSongs = async () => {
         </v-btn>
       </div>
 
-      <div v-if="songs.length > 0" class="d-flex flex-row justify-start align-center ml-4 mt-4">
+      <div v-if="songs.length > 0" class="d-flex flex-row justify-start align-center ml-4 mt-1">
         <p>Filtrar por: &nbsp;</p>
         <v-chip-group v-model="selectedTypes" multiple>
           <v-chip v-for="type in types" :key="type.value" :value="type.value"
@@ -69,12 +67,20 @@ const fetchSongs = async () => {
         </v-row>
       </v-container>
 
-      <v-text v-else class="mt-4">Nenhum resultado encontrado.</v-text>
+      <v-text v-else class="mt-4">Faça uma busca para exibir os resultados.</v-text>
     </v-main>
   </v-layout>
 </template>
 
 <style scoped>
+.v-container {
+  position: absolute;
+  bottom: 0;
+  overflow: scroll;
+  height: 70%;
+  margin-bottom: 3rem;
+}
+
 .text-field-container {
   height: 5rem;
   width: 95%;
