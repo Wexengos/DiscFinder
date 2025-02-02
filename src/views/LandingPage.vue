@@ -1,5 +1,6 @@
 <script setup>
-import LandingPageParallax from "@/assets/landing_page_parallax.jpg";
+import LandingPageParallax from "@/assets/landing_page_parallax.png";
+import LandingPageCardMusic from "@/assets/landing_page_card_music.jpg";
 import LandingPageCard from "@/components/LandingPageCard.vue";
 </script>
 
@@ -7,6 +8,7 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
     <v-layout>
         <v-main>
             <v-parallax scale="0.5" :src="LandingPageParallax" class="fixed-parallax">
+                <!-- <div class="overlay"></div> -->
                 <div>
                     <h1>Seus artistas favoritos estão aqui</h1>
                     <h2>Busque no catálogo pelo álbum, gravadora ou artista.</h2>
@@ -15,16 +17,21 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
                 </div>
             </v-parallax>
 
+            <!-- <div class="info-container"></div> -->
+
             <v-container>
                 <v-row justify="center">
                     <v-col cols="12" md="4">
-                        <LandingPageCard title="Explore Coleções Raras" text="🔍 Encontre discos raros e edições limitadas diretamente do maior banco de dados musical." />
+                        <LandingPageCard :imgSrc="LandingPageCardMusic" title="Explore Coleções Raras"
+                            text="🔍 Encontre discos raros e edições limitadas diretamente do maior banco de dados musical." />
                     </v-col>
                     <v-col cols="12" md="4">
-                        <LandingPageCard title="De olho das novidades..." text="Confira diferentes reimpressões de cada álbum" />
+                        <LandingPageCard title="De olho das novidades..."
+                            text="Confira diferentes reimpressões de cada álbum" />
                     </v-col>
                     <v-col cols="12" md="4">
-                        <LandingPageCard title="Card 1" text="This is the first card." />
+                        <LandingPageCard title="Buscas no Discogs"
+                            text="Nossas buscas são feitas diretamente no catálogo do Discogs..." />
                     </v-col>
                 </v-row>
             </v-container>
@@ -38,11 +45,21 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
     overflow: scroll;
 }
 
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #48005d80;
+    margin: 0 !important; 
+}
+
 .fixed-parallax {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 30rem;
+    height: 40rem;
 
     div {
         position: absolute;
@@ -60,6 +77,12 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
     h2 {
         text-shadow: 0.4rem 0.4rem 0.8rem rgba(0, 0, 0, 0.7);
     }
+}
+
+.info-container {
+    width: 100%;
+    height: 10rem;
+    background-color: #1d1d1d;
 }
 
 .v-container {

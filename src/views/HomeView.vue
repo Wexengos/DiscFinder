@@ -35,7 +35,7 @@ const fetchSongs = async () => {
 </script>
 
 <template>
-  <v-layout class="w-100 rounded rounded-md">
+  <v-layout class="rounded rounded-md">
     <!-- <v-navigation-drawer color="grey-lighten-1" location="left" width="150" permanent></v-navigation-drawer> -->
 
     <v-main class="d-flex flex-column mx-4">
@@ -44,7 +44,7 @@ const fetchSongs = async () => {
 
       <div class="d-flex flex-row justify-center align-center text-field-container">
         <v-text-field label="Digite um termo para a busca (Artista, Álbum, Lançamento, etc...)" v-model="search"
-          outlined></v-text-field>
+          outlined @keyup.enter="fetchSongs"></v-text-field>
 
         <v-btn density="compact" :disabled="search.length === 0" @click="fetchSongs">
           Buscar

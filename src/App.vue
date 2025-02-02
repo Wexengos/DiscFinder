@@ -5,7 +5,7 @@ import { RouterView } from 'vue-router'
 <template>
   <v-app>
     <div class="app-container">
-      <v-app-bar title="DiskFinder" height="64" :elevation="2" scroll="fade-image hide">
+      <v-app-bar title="DiscFinder" height="64" :elevation="2" scroll="fade-image hide">
       </v-app-bar>
       <RouterView />
     </div>
