@@ -37,9 +37,10 @@ defineProps({
     text-align: center;
     color: #d8d8d8;
     overflow: hidden;
+    border: 1px solid #202020;
 
     .card-text {
-        background-color: #313131;
+        background-color: #000000;
         font-size: 1rem;
     }
 }
