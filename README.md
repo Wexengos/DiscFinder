@@ -1,4 +1,4 @@
-#🟣 DiscFinder
+# 🟣 DiscFinder
 ## Apresentação
 
  o [DiscFinder](https://discfinder.vercel.app/) utiliza a [API do Discogs](https://www.discogs.com/developers) para buscar entre artistas, gravadoras e álbuns (lançamento principal e outras edições), e retorna uma lista de resultados que pode ser filtrada entre estas 4 opções.
