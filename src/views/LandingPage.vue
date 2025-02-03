@@ -1,15 +1,18 @@
 <script setup>
 import LandingPageParallax from "@/assets/landing_page_parallax.png";
+
+import LandingPageCard from "@/components/LandingPageCard.vue";
+
 import LandingPageCardMusic from "@/assets/landing_page_card_music.jpg";
 import LandingPageCardDiscogs from "@/assets/landing_page_card_discogs.jpg";
-import LandingPageCard from "@/components/LandingPageCard.vue";
+import LandingPageCardReleases from "@/assets/landing_page_card_releases.jpg";
+
 </script>
 
 <template>
     <v-layout>
         <v-main>
             <v-parallax scale="0.5" :src="LandingPageParallax" class="fixed-parallax">
-                <!-- <div class="overlay"></div> -->
                 <div>
                     <h1>Seus artistas favoritos estão aqui</h1>
                     <h2>Busque no catálogo pelo álbum, gravadora ou artista.</h2>
@@ -18,8 +21,6 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
                 </div>
             </v-parallax>
 
-            <!-- <div class="info-container"></div> -->
-
             <v-container>
                 <v-row justify="center">
                     <v-col class="landing-page-card-container" cols="12" sm="12" md="4">
@@ -27,7 +28,7 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
                             text="Explore discos raros e edições limitadas no maior banco de dados musical do mundo." />
                     </v-col>
                     <v-col class="landing-page-card-container" cols="12" md="4">
-                        <LandingPageCard title="Por dentro das novidades"
+                        <LandingPageCard :imgSrc="LandingPageCardReleases" title="Por dentro das novidades"
                             text="Acompanhe as últimas reimpressões e novas edições de seus álbuns favoritos." />
                     </v-col>
                     <v-col class="landing-page-card-container" cols="12" md="4">
@@ -103,5 +104,4 @@ import LandingPageCard from "@/components/LandingPageCard.vue";
     justify-content: center;
     margin-top: 2rem;
 }
-
 </style>

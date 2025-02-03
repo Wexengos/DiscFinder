@@ -31,7 +31,7 @@ defineProps({
 <style scoped>
 .v-card {
     width: 20rem;
-    height: 17.8rem;
+    height: 16.8rem;
     border-radius: 0.3rem;
     background-color: #202020;
     text-align: center;
