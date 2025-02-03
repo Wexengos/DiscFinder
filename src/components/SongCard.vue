@@ -7,7 +7,7 @@
                     }}</v-card-title>
                 <v-card-subtitle>{{ song.type }}</v-card-subtitle>
             </div>
-            <img :src="song.cover_image" alt="Imagem da música" width="160" />
+            <img :src="song.cover_image" alt="Imagem do item" width="160" />
         </div>
     </v-card>
 </template>

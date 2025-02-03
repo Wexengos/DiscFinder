@@ -39,16 +39,23 @@ const parsedProfile = computed(() => {
                 <div>
                     <v-row class="item-profile d-flex w-100">
                         <div>
-                            <img class="item-profile-pic" v-if="item.images?.length > 0" :src="item.images[0].uri">            
+                            <img class="item-profile-pic" v-if="item.images?.length > 0" :src="item.images[0].uri">
                         </div>
 
                         <div class="item-profile-text-container">
                             <h1>{{ item.name || item.title }}</h1>
+                            <div v-if="item.artists?.length > 0">
+                                <p v-for="(artist, index) in item.artists" :key="index">{{ artist.name }}</p>
+                            </div>
                             <h2>{{ typeLabel }}</h2>
-                            <v-divider class="mb-2" />
+
+
+                            <v-divider />
                             <div v-if="item.profile" class="item-profile-text" v-html="parsedProfile"></div>
 
-                            <div v-if="item.tracklist">
+                            <div class="item-container mt-1" v-if="item.tracklist">
+                                <h3 class="mb-4">Lista de faixas</h3>
+                                <v-divider />
                                 <v-row v-for="(track, index) in item.tracklist" :key="index" class="track-item">
                                     <v-col>{{ track.position }}</v-col>
                                     <v-col>{{ track.title }}</v-col>
@@ -114,14 +121,14 @@ const parsedProfile = computed(() => {
 
 .item-container {
     padding: 2rem;
-    background-color: rgb(31, 31, 31);
+    background-color: #1f1f1f;
 }
 
 .item-profile {
     display: flex;
-    background: rgb(43, 43, 43);
+    background: #2b2b2b;
     justify-content: space-around;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: 3rem;
     border-radius: 1rem;
 
@@ -136,18 +143,19 @@ const parsedProfile = computed(() => {
 
         @media (max-width: 1024px) {
             width: 12rem;
-            height: 12rem;
         }
 
         @media (min-width: 1024px) {
             width: 19rem;
-            height: 19rem;
         }
     }
 
     .item-profile-text {
+        background-color: #1f1f1f;
+        padding: 0.75rem 2rem;
         max-height: 20rem;
         overflow: scroll;
+        border-radius: 0 0 1rem 1rem;
     }
 }
 </style>
