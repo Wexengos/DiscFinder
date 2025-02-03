@@ -29,7 +29,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    width: 24rem;
+    width: 20rem;
     height: 14rem;
     cursor: pointer;
 

@@ -5,7 +5,7 @@
 
   .v-layout {
     display: flex;
-    width: 100vw; 
+    width: 100vw;
     align-items: center;
     flex-direction: column;
     background: rgb(5, 5, 5);
@@ -23,7 +23,7 @@
     color: #d8d8d8;
 
     @media (max-width: 1023px) {
-      margin-top: 5rem;
+      margin-top: 4rem;
     }
 
     @media (min-width: 1024px) {

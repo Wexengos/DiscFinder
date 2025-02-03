@@ -51,7 +51,7 @@ const fetchSongs = async () => {
 
       <div v-if="songs.length > 0" class="d-flex flex-row justify-start align-center ml-4 mt-1">
         <p>Filtrar por: &nbsp;</p>
-        <v-chip-group v-model="selectedTypes" multiple>
+        <v-chip-group v-model="selectedTypes" multiple class="chip-group">
           <v-chip v-for="type in types" :key="type.value" :value="type.value"
             :class="{ 'selected-chip': selectedTypes.includes(type.value) }">
             {{ type.label }}
@@ -102,6 +102,12 @@ const fetchSongs = async () => {
     background-color: #2f2631;
     color: #666;
   }
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .selected-chip {

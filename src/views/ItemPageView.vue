@@ -35,58 +35,54 @@ const parsedProfile = computed(() => {
     <v-layout>
         <v-main>
             <div class="item-container" v-if="item">
-                <h1>{{ item.name || item.title }}</h1>
-                <h2>{{ typeLabel }}</h2>
 
                 <div>
                     <v-row class="item-profile d-flex w-100">
-                        <img width="300px" v-if="item.images?.length > 0" :src="item.images[0].uri">
+                        <div>
+                            <img class="item-profile-pic" v-if="item.images?.length > 0" :src="item.images[0].uri">            
+                        </div>
 
-                        <div v-if="item.profile" class="item-profile-text" v-html="parsedProfile"></div>
+                        <div class="item-profile-text-container">
+                            <h1>{{ item.name || item.title }}</h1>
+                            <h2>{{ typeLabel }}</h2>
+                            <v-divider class="mb-2" />
+                            <div v-if="item.profile" class="item-profile-text" v-html="parsedProfile"></div>
+
+                            <div v-if="item.tracklist">
+                                <v-row v-for="(track, index) in item.tracklist" :key="index" class="track-item">
+                                    <v-col>{{ track.position }}</v-col>
+                                    <v-col>{{ track.title }}</v-col>
+                                    <v-col>{{ track.duration }}</v-col>
+                                </v-row>
+                            </div>
+                        </div>
 
                         <div class="ml-5" v-if="item.contact_info">
                             <h2>Informações de contato:</h2>
                             <p>{{ item.contact_info }}</p>
                         </div>
 
-                        <div>
-                            <div class="ml-5" v-if="item.genres?.length > 0">
-                                <h2>Gênero(s):</h2>
-                                <v-row>
-                                    <p v-for="(genre, index) in item.genres" :key="index">{{ genre }}, </p>
-                                </v-row>
-                            </div>
-
-                            <div class="ml-5" v-if="item.styles?.length > 0">
-                                <h2>Estilo(s):</h2>
-                                <v-row>
-                                    <p v-for="(style, index) in item.styles" :key="index">{{ style }}, </p>
-                                </v-row>
-                            </div>
-                        </div>
-
                     </v-row>
 
-                    <div v-if="item.urls?.length > 0">
-                        <h2>Links:</h2>
-                        <v-col>
-                            <div v-for="(url, index) in item.urls" :key="index">
-                                <a :href="url" target="_blank">{{ url }}</a>
-                            </div>
-                        </v-col>
-                    </div>
+                    <v-row class="links-container">
+                        <div v-if="item.urls?.length > 0">
+                            <v-col>
+                                <h2>Links:</h2>
+                                <div v-for="(url, index) in item.urls" :key="index">
+                                    <a :href="url" target="_blank">{{ url }}</a>
+                                </div>
+                            </v-col>
+                        </div>
 
-                    <div v-if="type === 'artists' && item.aliases?.length > 0">
-                        <h2>Apelidos:</h2>
-
-                        <v-row>
-                            <div class="alias-container" v-for="(alias, index) in item.aliases" :key="index">
-                                <div>
+                        <div v-if="type === 'artists' && item.aliases?.length > 0">
+                            <v-col class="alias-container">
+                                <h2>Apelidos:</h2>
+                                <div v-for="(alias, index) in item.aliases" :key="index">
                                     <a :href="alias.resource_url">{{ alias.name }}</a>
                                 </div>
-                            </div>
-                        </v-row>
-                    </div>
+                            </v-col>
+                        </div>
+                    </v-row>
                 </div>
             </div>
             <div class="loading-container d-flex w-100 h-50 align-center justify-center" v-else>
@@ -99,18 +95,16 @@ const parsedProfile = computed(() => {
 <style scoped>
 .v-main {
     overflow: scroll;
-    margin-bottom: 1rem;
 }
 
-.v-row {
-    margin: 0;
-    align-items: center;
+.links-container {
+    margin: 1rem;
+    /* align-items: center; */
 
     .alias-container {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin: 1rem;
+        margin: 0 4rem;
 
         img {
             margin-bottom: 1rem;
@@ -127,13 +121,31 @@ const parsedProfile = computed(() => {
     display: flex;
     background: rgb(43, 43, 43);
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: flex-end;
     padding: 3rem;
     border-radius: 1rem;
-    margin-top: 2rem;
+
+    @media (min-width: 1024px) {
+        .item-profile-text-container {
+            width: 70%;
+        }
+    }
+
+    .item-profile-pic {
+        border-radius: 1rem;
+
+        @media (max-width: 1024px) {
+            width: 12rem;
+            height: 12rem;
+        }
+
+        @media (min-width: 1024px) {
+            width: 19rem;
+            height: 19rem;
+        }
+    }
 
     .item-profile-text {
-        width: 70%;
         max-height: 20rem;
         overflow: scroll;
     }
