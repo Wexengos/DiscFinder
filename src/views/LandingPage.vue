@@ -16,7 +16,7 @@ import LandingPageCardReleases from "@/assets/landing_page_card_releases.jpg";
                 <div>
                     <h1>Seus artistas favoritos estão aqui</h1>
                     <h2>Busque no catálogo pelo álbum, gravadora ou artista.</h2>
-                    <v-btn class="text-none text-subtitle-1 mt-4" text-color="#48005d" size="small" variant="flat"
+                    <v-btn class="text-none text-subtitle-1 mt-4" size="small" variant="flat"
                         href="/home">Acesse</v-btn>
                 </div>
             </v-parallax>
@@ -48,16 +48,6 @@ import LandingPageCardReleases from "@/assets/landing_page_card_releases.jpg";
     overflow: scroll;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #48005d80;
-    margin: 0 !important;
-}
-
 .fixed-parallax {
     display: flex;
     align-items: center;
@@ -82,11 +72,6 @@ import LandingPageCardReleases from "@/assets/landing_page_card_releases.jpg";
     }
 }
 
-.info-container {
-    width: 100%;
-    height: 10rem;
-    background-color: #1d1d1d;
-}
 
 .v-container {
     margin-top: 2.25rem;

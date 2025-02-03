@@ -1,14 +1,17 @@
 <script setup>
+import api from "../services/api.js";
+
 import { useRoute } from "vue-router";
 import { onMounted, computed, ref } from "vue";
-import { marked } from "marked"; // Import marked
-import api from "../services/api.js";
+import { marked } from "marked";
+
 import { ItemPageTypes } from "@/constants/ItemPageTypes.js";
 
 const route = useRoute();
-const id = route.query.id;
-const type = route.query.type + 's';
 
+const id = route.query.id;
+
+const type = route.query.type + 's';
 const typeLabel = computed(() => {
     const itemType = ItemPageTypes.find(item => item.value === type);
     return itemType ? itemType.label : type;
@@ -25,7 +28,6 @@ onMounted(async () => {
     }
 });
 
-// Compute the Markdown-parsed profile text
 const parsedProfile = computed(() => {
     return item.value?.profile ? marked(item.value.profile) : "";
 });
@@ -35,7 +37,6 @@ const parsedProfile = computed(() => {
     <v-layout>
         <v-main>
             <div class="item-container" v-if="item">
-
                 <div>
                     <v-row class="item-profile d-flex w-100">
                         <div>
@@ -43,10 +44,12 @@ const parsedProfile = computed(() => {
                         </div>
 
                         <div class="item-profile-text-container">
-                            <h1>{{ item.name || item.title }}</h1>
-                            <div v-if="item.artists?.length > 0">
-                                <p v-for="(artist, index) in item.artists" :key="index">{{ artist.name }}</p>
-                            </div>
+                            <h1 class="mb-4">{{ item.name || item.title }}</h1>
+                            <v-row class="mb-1 ml-3">
+                                <div v-if="item.artists?.length > 0">
+                                    <p v-for="(artist, index) in item.artists" :key="index">{{ artist.name }}</p>
+                                </div>
+                            </v-row>
                             <h2>{{ typeLabel }}</h2>
 
 
@@ -68,7 +71,6 @@ const parsedProfile = computed(() => {
                             <h2>Informações de contato:</h2>
                             <p>{{ item.contact_info }}</p>
                         </div>
-
                     </v-row>
 
                     <v-row class="links-container">

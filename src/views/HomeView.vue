@@ -1,11 +1,11 @@
 <script setup>
 
 import { computed, ref } from 'vue';
-import SongCard from '@/components/SongCard.vue';
+import ItemCard from '@/components/ItemCard.vue';
 import api from '@/services/api';
 
 const search = ref('');
-const songs = ref([]);
+const items = ref([]);
 
 const types = [
   { value: 'artist', label: 'Artista' },
@@ -16,19 +16,19 @@ const types = [
 
 const selectedTypes = ref([]);
 
-const filteredSongs = computed(() => {
+const filteredItems = computed(() => {
   if (selectedTypes.value.length === 0) {
-    return songs.value;
+    return items.value;
   }
-  return songs.value.filter(song => selectedTypes.value.includes(song.type));
+  return items.value.filter(song => selectedTypes.value.includes(song.type));
 });
 
 const fetchSongs = async () => {
   try {
     const response = await api.get('/database/search', { params: { q: search.value } });
-    songs.value = response.data.results;
+    items.value = response.data.results;
   } catch (error) {
-    console.error('Error fetching songs:', error);
+    console.error('Erro ao buscar os itens:', error);
   }
 };
 
@@ -36,10 +36,7 @@ const fetchSongs = async () => {
 
 <template>
   <v-layout class="rounded rounded-md">
-    <!-- <v-navigation-drawer color="grey-lighten-1" location="left" width="150" permanent></v-navigation-drawer> -->
-
     <v-main class="d-flex flex-column">
-
       <div class="d-flex flex-row justify-center align-center text-field-container">
         <v-text-field label="Digite um termo para a busca (Artista, Álbum, Lançamento, etc...)" v-model="search"
           outlined @keyup.enter="fetchSongs"></v-text-field>
@@ -49,7 +46,7 @@ const fetchSongs = async () => {
         </v-btn>
       </div>
 
-      <div v-if="songs.length > 0" class="d-flex flex-row justify-start align-center ml-4 mt-1">
+      <div v-if="items.length > 0" class="d-flex flex-row justify-start align-center ml-4 mt-1">
         <p>Filtrar por: &nbsp;</p>
         <v-chip-group v-model="selectedTypes" multiple class="chip-group">
           <v-chip v-for="type in types" :key="type.value" :value="type.value"
@@ -59,10 +56,10 @@ const fetchSongs = async () => {
         </v-chip-group>
       </div>
 
-      <v-container v-if="songs.length > 0" class="mt-5">
+      <v-container v-if="items.length > 0" class="mt-5">
         <v-row>
-          <v-col v-for="song in filteredSongs" :key="song.id" cols="12" md="12" lg="4">
-            <SongCard :song="song" />
+          <v-col v-for="item in filteredItems" :key="item.id" cols="12" md="12" lg="4">
+            <ItemCard :item="item" />
           </v-col>
         </v-row>
       </v-container>
